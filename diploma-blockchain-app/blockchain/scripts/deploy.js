@@ -1,11 +1,22 @@
+const hre = require("hardhat");
+
 async function main() {
-    const Diploma = await ethers.getContractFactory("DiplomaRegistry");
-    const diploma = await Diploma.deploy();
-    await diploma.waitForDeployment();
-    console.log("Contract deployed to:", await diploma.getAddress());
+
+  console.log("Deploying contract...");
+
+  const DiplomaRegistry = await hre.ethers.getContractFactory("DiplomaRegistry");
+
+  const diplomaRegistry = await DiplomaRegistry.deploy();
+
+  await diplomaRegistry.waitForDeployment();
+
+  const address = await diplomaRegistry.getAddress();
+
+  console.log("DiplomaRegistry deployed to:", address);
+
 }
 
 main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
+  console.error(error);
+  process.exitCode = 1;
 });

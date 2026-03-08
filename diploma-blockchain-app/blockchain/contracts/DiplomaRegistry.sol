@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
 contract DiplomaRegistry {
+
     address public admin;
 
     constructor() {
@@ -13,11 +14,12 @@ contract DiplomaRegistry {
         string degree;
         string university;
         uint year;
-        bytes32 hash; // preuve cryptographique
         bool exists;
     }
 
     mapping(string => Diploma) private diplomas;
+
+    event DiplomaAdded(string cne, string name);
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "Only admin can add diploma");
@@ -31,11 +33,12 @@ contract DiplomaRegistry {
         string memory university,
         uint year
     ) public onlyAdmin {
+
         require(!diplomas[cne].exists, "Diploma already exists");
 
-        bytes32 diplomaHash = keccak256(abi.encodePacked(name, degree, university, year, cne));
+        diplomas[cne] = Diploma(name, degree, university, year, true);
 
-        diplomas[cne] = Diploma(name, degree, university, year, diplomaHash, true);
+        emit DiplomaAdded(cne, name);
     }
 
     function getDiploma(string memory cne)
@@ -46,11 +49,17 @@ contract DiplomaRegistry {
             string memory,
             string memory,
             uint,
-            bytes32,
             bool
         )
     {
         Diploma memory d = diplomas[cne];
-        return (d.name, d.degree, d.university, d.year, d.hash, d.exists);
+
+        return (
+            d.name,
+            d.degree,
+            d.university,
+            d.year,
+            d.exists
+        );
     }
 }

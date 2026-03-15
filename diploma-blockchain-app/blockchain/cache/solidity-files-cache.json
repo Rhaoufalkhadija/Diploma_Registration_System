@@ -1,0 +1,41 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\sofya\\Diploma_Registration_System\\diploma-blockchain-app\\blockchain\\contracts\\DiplomaRegistry.sol": {
+      "lastModificationDate": 1773500146949,
+      "contentHash": "15752e90b036b87ca2d525924a12db9e",
+      "sourceName": "contracts/DiplomaRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "DiplomaRegistry"
+      ]
+    }
+  }
+}
